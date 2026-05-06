@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90-Day Plan — Head of Sales, GrowthPal</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a18;
+    --ink-muted: #6b6b66;
+    --ink-faint: #a8a8a2;
+    --paper: #fafaf7;
+    --surface: #f2f2ed;
+    --border: rgba(26,26,24,0.1);
+    --border-soft: rgba(26,26,24,0.06);
+    --teal: #0d8f6f;
+    --teal-light: #e2f4ed;
+    --teal-mid: #9ddac5;
+    --amber: #b8690e;
+    --amber-light: #fdf0db;
+    --amber-mid: #f4c06a;
+    --blue: #1f60a8;
+    --blue-light: #e8f0fb;
+    --blue-mid: #a0c0e8;
+  }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 48px 24px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header ---- */
+  .header { margin-bottom: 40px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); font-weight: 500; margin-bottom: 12px; }
+  .title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(30px, 5vw, 50px); line-height: 1.1; color: var(--ink); margin-bottom: 16px; font-weight: 400; }
+  .title em { font-style: italic; color: var(--teal); }
+  .subtitle { font-size: 15px; color: var(--ink-muted); max-width: 600px; line-height: 1.7; }
+
+  /* ---- Intro ---- */
+  .intro-section { margin-bottom: 40px; }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .intro-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+  .intro-card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+  .intro-card h3 { font-family: 'Instrument Serif', Georgia, serif; font-size: 17px; font-weight: 400; margin-bottom: 10px; color: var(--ink); }
+  .intro-card p { font-size: 13.5px; color: var(--ink-muted); line-height: 1.65; }
+  .intro-card p + p { margin-top: 8px; }
+  .intro-card strong { color: var(--ink); font-weight: 500; }
+  .market-block { background: var(--surface); border: 1px solid var(--border-soft); border-radius: 14px; padding: 24px 28px; margin-bottom: 16px; }
+  .market-block-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .market-block p { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
+  .market-block p + p { margin-top: 10px; }
+  .market-block strong { color: var(--ink); font-weight: 500; }
+  .approach-block { background: var(--ink); border-radius: 14px; padding: 24px 28px; margin-bottom: 0; }
+  .approach-block p { font-family: 'Instrument Serif', Georgia, serif; font-size: 17px; line-height: 1.7; color: #e0e0da; font-style: italic; }
+  .approach-block strong { color: #fff; font-style: normal; font-weight: 400; }
+
+  /* ---- Phase Nav ---- */
+  .phase-nav { display: flex; gap: 4px; margin: 32px 0 40px; background: var(--surface); padding: 4px; border-radius: 12px; border: 1px solid var(--border-soft); }
+  .phase-btn { flex: 1; padding: 10px 12px; border: none; background: transparent; border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--ink-muted); cursor: pointer; transition: all 0.18s ease; text-align: center; line-height: 1.3; }
+  .phase-btn:hover { color: var(--ink); background: rgba(26,26,24,0.04); }
+  .phase-btn.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .phase-btn .range { display: block; font-size: 11px; font-weight: 400; color: inherit; opacity: 0.7; margin-top: 1px; }
+
+  /* ---- Panels ---- */
+  .phase-panel { display: none; }
+  .phase-panel.active { display: block; }
+
+  /* ---- Phase header ---- */
+  .phase-header { display: flex; align-items: flex-start; gap: 20px; padding: 28px 32px; border-radius: 16px; margin-bottom: 24px; }
+  .phase-header.teal { background: var(--teal-light); border: 1px solid var(--teal-mid); }
+  .phase-header.amber { background: var(--amber-light); border: 1px solid var(--amber-mid); }
+  .phase-header.blue { background: var(--blue-light); border: 1px solid var(--blue-mid); }
+  .phase-number { font-family: 'Instrument Serif', Georgia, serif; font-size: 56px; line-height: 1; font-weight: 400; flex-shrink: 0; width: 52px; }
+  .phase-header.teal .phase-number { color: var(--teal); }
+  .phase-header.amber .phase-number { color: var(--amber); }
+  .phase-header.blue .phase-number { color: var(--blue); }
+  .phase-meta h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+  .phase-meta p { font-size: 14px; color: var(--ink-muted); line-height: 1.6; max-width: 560px; }
+  .focus-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tag { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 6px; }
+  .tag.teal { background: rgba(13,143,111,0.12); color: #087a5d; }
+  .tag.amber { background: rgba(184,105,14,0.12); color: #9a5a0a; }
+  .tag.blue { background: rgba(31,96,168,0.12); color: #1850a0; }
+
+  /* ---- Pillars ---- */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .pillar { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+  .pillar-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  .pillar-label.teal { color: var(--teal); }
+  .pillar-label.amber { color: var(--amber); }
+  .pillar-label.blue { color: var(--blue); }
+  .pillar h3 { font-size: 15px; font-weight: 500; margin-bottom: 10px; color: var(--ink); }
+  .pillar ul { list-style: none; padding: 0; }
+  .pillar ul li { font-size: 13.5px; color: var(--ink-muted); padding: 5px 0 5px 14px; border-bottom: 1px solid var(--border-soft); position: relative; line-height: 1.5; }
+  .pillar ul li:last-child { border-bottom: none; }
+  .pillar ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 5px; height: 5px; border-radius: 50%; }
+  .pillar.t ul li::before { background: var(--teal); }
+  .pillar.a ul li::before { background: var(--amber); }
+  .pillar.b ul li::before { background: var(--blue); }
+
+  /* ---- Metrics ---- */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .metric-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; text-align: center; }
+  .metric-value { font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1; margin-bottom: 4px; }
+  .metric-value.teal { color: var(--teal); }
+  .metric-value.amber { color: var(--amber); }
+  .metric-value.blue { color: var(--blue); }
+  .metric-label { font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
+
+  /* ---- Week timeline ---- */
+  .week-timeline { margin-bottom: 28px; }
+  .week-timeline h3 { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 16px; }
+  .weeks { display: flex; }
+  .week { flex: 1; border-left: 1px solid var(--border); padding: 14px 14px 14px 16px; }
+  .week:first-child { border-left: none; }
+  .week-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .week-label.teal { color: var(--teal); }
+  .week-label.amber { color: var(--amber); }
+  .week-label.blue { color: var(--blue); }
+  .week p { font-size: 12.5px; color: var(--ink-muted); line-height: 1.55; }
+
+  /* ---- Key outcome ---- */
+  .key-outcome { border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start; border: 1px solid var(--border-soft); background: var(--surface); }
+  .outcome-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; }
+  .outcome-icon.teal { background: var(--teal-light); }
+  .outcome-icon.amber { background: var(--amber-light); }
+  .outcome-icon.blue { background: var(--blue-light); }
+  .outcome-body h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted); text-transform: uppercase; margin-bottom: 4px; }
+  .outcome-body p { font-size: 14px; color: var(--ink); line-height: 1.6; }
+
+  /* ---- Inline note ---- */
+  .inline-note { background: var(--blue-light); border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; padding: 11px 16px; font-size: 13px; color: #1850a0; line-height: 1.55; margin: 0 0 24px; }
+
+  /* ---- Narrative ---- */
+  .narrative { background: var(--ink); color: #f0f0eb; border-radius: 16px; padding: 32px 36px; margin-bottom: 32px; }
+  .narrative p { font-family: 'Instrument Serif', Georgia, serif; font-size: 18px; line-height: 1.7; font-style: italic; color: #e8e8e3; }
+  .narrative p + p { margin-top: 16px; }
+  .narrative strong { font-style: normal; color: #ffffff; font-weight: 400; }
+
+  /* ---- Misc ---- */
+  .section-divider { height: 1px; background: var(--border-soft); margin: 32px 0; }
+  .spacer { height: 20px; }
+  .footer-note { font-size: 12.5px; color: var(--ink-faint); text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-soft); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="eyebrow">Application Response · GrowthPal</div>
+  <h1 class="title">Building a predictable<br>global sales pipeline —<br><em>my first 90 days.</em></h1>
+  <p class="subtitle">A structured plan for taking GrowthPal from a founder-led revenue motion to a scalable, repeatable engine across US, European, and Indian markets.</p>
+</div>
+
+<!-- INTRO SECTION -->
+<div class="intro-section">
+
+  <div class="intro-grid">
+    <div class="intro-card">
+      <div class="intro-card-label">Track Record</div>
+      <h3>Built this engine before, twice</h3>
+      <p>I've done this exact transition — from scratch to a structured, predictable revenue motion — twice in B2B SaaS companies. In both cases, I joined without a playbook, without a pipeline team, and without a clear ICP. In both, the company moved from reactive, deal-by-deal selling to a forecasted, repeatable revenue engine within 12 months.</p>
+      <p>The approach was similar both times: <strong>listen first, build second, close third</strong> — then scale around what's proven to work.</p>
+    </div>
+    <div class="intro-card">
+      <div class="intro-card-label">M&amp;A From the Inside</div>
+      <h3>Firsthand experience of M&A, twice</h3>
+      <p>That wasn't incidental — it gives me a perspective most sales leaders don't have. I've seen what happens after an LOI lands: the internal deliberation, the multi-stakeholder alignment, the pace at which decisions move. One acquirer was <strong>Scaleworks</strong> — a PE firm that acquires SaaS businesses - retains them, and sells at a multiple. The other was a strategic acquirer running a structured Corp Dev function.</p>
+      <p>I understand what GrowthPal's customers are living through — not as a concept, but real life experience.</p>
+    </div>
+  </div>
+
+  <div class="market-block">
+    <div class="market-block-label">Market Understanding</div>
+    <p>The headline number looks massive: <strong>global M&A deal value is already ~$1.8 trillion in 2026 YTD</strong>. But that's not GrowthPal's market. The real opportunity is in the mid-market — deals typically in the $50M–$100M range — where acquisition mandates are active, Corp Dev teams are lean, and sourcing is still largely manual. Deloitte consistently flags mid-market M&A as underpenetrated but growing, particularly as more companies build dedicated inorganic growth functions.</p>
+    <p><strong>Egnyte</strong> is a real example: their Corp Dev function — a three-person team led by the COO — runs a standing mandate to surface one acquisition-worthy target ($50–100M range) for leadership every two weeks. It's a year-long continuous process, and they're not shopping for software. They're looking for someone to reliably surface the right opportunity at the right moment. That buyer profile exists in scale across the US, Europe, and India — and GrowthPal is built precisely for them.</p>
+  </div>
+
+  <div class="approach-block">
+    <p>"My first priority will be finding <strong>a repeatable deal origination motion — where we lead with actual acquisition opportunities, not product demos</strong>. The moment a Corp Dev head or CEO sees a relevant off-market target in their inbox, the conversation changes entirely. Once that motion is working and proven, I'll scale the team around it. AEs, BDRs, regional hires — everything follows proof of repeatability, not assumption."</p>
+  </div>
+
+</div>
+
+<!-- PHASE NAV -->
+<div class="phase-nav">
+  <button class="phase-btn active" onclick="switchPhase(0)">
+    Phase 1
+    <span class="range">Days 1–30 · Listen &amp; Audit</span>
+  </button>
+  <button class="phase-btn" onclick="switchPhase(1)">
+    Phase 2
+    <span class="range">Days 31–60 · Build the Engine</span>
+  </button>
+  <button class="phase-btn" onclick="switchPhase(2)">
+    Phase 3
+    <span class="range">Days 61–90 · Execute &amp; Prove</span>
+  </button>
+</div>
+
+<!-- PHASE 1 -->
+<div class="phase-panel active" id="panel-0">
+
+  <div class="phase-header teal">
+    <div class="phase-number">01</div>
+    <div class="phase-meta">
+      <h2>Listen, Learn &amp; Audit — Days 1–30</h2>
+      <p>This phase is pure intelligence gathering — and I'll be in the room for as much of it as possible. I'll attend every customer-facing call, especially early in the sales cycle, where the real buying motivations and objections surface. The goal: walk into Day 31 with a clear diagnosis of what's working, what's broken, and where the biggest pipeline opportunity lies across defined markets.</p>
+      <div class="focus-tags">
+        <span class="tag teal">ICP Definition</span>
+        <span class="tag teal">Win/Loss Analysis</span>
+        <span class="tag teal">Customer Discovery</span>
+        <span class="tag teal">Competitive Mapping</span>
+        <span class="tag teal">Revenue Audit</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value teal">10+</div>
+      <div class="metric-label">Customer discovery calls</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value teal">5+</div>
+      <div class="metric-label">Lost deal debriefs</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value teal">1</div>
+      <div class="metric-label">Full sales audit delivered to founders</div>
+    </div>
+  </div>
+
+  <div class="week-timeline">
+    <h3>Week by Week</h3>
+    <div class="weeks">
+      <div class="week">
+        <div class="week-label teal">Week 1</div>
+        <p>Shadow founders on every active deal. Attend all customer-facing calls — especially those in the early stages of the sales cycle, where objections and motivations surface most honestly. Map the current pipeline stage-by-stage.</p>
+      </div>
+      <div class="week">
+        <div class="week-label teal">Week 2</div>
+        <p>Run discovery calls with existing clients — Razorpay, Quantiphi, Mindtree profile types across regions. Understand why they bought, what they valued, and what friction they faced during the process.</p>
+      </div>
+      <div class="week">
+        <div class="week-label teal">Week 3</div>
+        <p>Conduct 5 lost-deal post-mortems. Review competitor positioning — Grata, Inven, SourceScrub, PitchBook. Map where GrowthPal wins and loses on value. Note the Grata/SourceScrub Datasite acquisition as a live displacement opportunity.</p>
+      </div>
+      <div class="week">
+        <div class="week-label teal">Week 4</div>
+        <p>Synthesise all findings. Deliver a written audit to the founding team: ICP clarity, target countries, penetration strategy, pipeline health across regions, and the top 3 structural gaps to fix in Phase 2.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar t">
+      <div class="pillar-label teal">Revenue Audit</div>
+      <h3>Pipeline &amp; Deal Health</h3>
+      <ul>
+        <li>Map every active deal and its stage</li>
+        <li>Calculate average sales cycle length (expect 3–6 months for enterprise)</li>
+        <li>Identify drop-off stages and calculate win rate</li>
+        <li>Understand current ACV, deal size range, and pricing logic</li>
+        <li>Review all historical contracts across regions</li>
+      </ul>
+    </div>
+    <div class="pillar t">
+      <div class="pillar-label teal">ICP &amp; Personas</div>
+      <h3>Buyers &amp; Decision Makers</h3>
+      <ul>
+        <li>Define top 3 ICP profiles by firmographic</li>
+        <li>Map personas: Corp Dev Head, COO, CFO, CEO — who owns the mandate</li>
+        <li>Identify firms like Egnyte — Corp Dev teams with a mandate to surface M&amp;A-worthy targets</li>
+        <li>Document buying triggers, urgency signals, and "aha moments"</li>
+        <li>Map differences in buying process: US vs EU vs India</li>
+      </ul>
+    </div>
+    <div class="pillar t">
+      <div class="pillar-label teal">Competitive Intel</div>
+      <h3>Positioning &amp; Battlecards</h3>
+      <ul>
+        <li>Build battlecards vs right competitors. A few I found are Grata, Inven, PitchBook, SourceScrub</li>
+        <li>Document GrowthPal's 3 strongest, most defensible differentiators</li>
+        <li>Identify common objection patterns and sharpen responses</li>
+        <li>Flag Grata/SourceScrub Datasite merger as a live displacement window</li>
+        <li>Map pricing relative to market and value delivered</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="key-outcome">
+    <div class="outcome-icon teal">📋</div>
+    <div class="outcome-body">
+      <h4>Phase 1 Deliverable</h4>
+      <p>A written "State of Revenue" audit presented to the founding team — covering ICP, win/loss analysis, pipeline health across US, EU, and India, and the top 3 structural gaps to address in Phase 2. This document is the baseline that all future strategy refinements are measured against.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase-panel" id="panel-1">
+
+  <div class="phase-header amber">
+    <div class="phase-number">02</div>
+    <div class="phase-meta">
+      <h2>Build the Engine — Days 31–60</h2>
+      <p>Architecture phase. Everything I build here becomes the operating system for the sales team that follows. The goal is not a perfect playbook — it's Version 1 of a playbook that closes deals and improves with every cycle. I'll personally run the enterprise deals to demonstrate the motion. A core design principle throughout: automate and tool-up the outreach so the system doesn't depend on any single person to keep it running.</p>
+      <div class="focus-tags">
+        <span class="tag amber">Sales Playbook v1</span>
+        <span class="tag amber">CRM &amp; Tooling</span>
+        <span class="tag amber">Automated Outreach</span>
+        <span class="tag amber">US / EU / India Targeting</span>
+        <span class="tag amber">BDR Hiring</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value amber">v1</div>
+      <div class="metric-label">Sales playbook — living document, will evolve each sprint</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value amber">3</div>
+      <div class="metric-label">Automated outreach sequences live</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value amber">100+</div>
+      <div class="metric-label">Target accounts across US, EU &amp; India</div>
+    </div>
+  </div>
+
+  <div class="week-timeline">
+    <h3>Week by Week</h3>
+    <div class="weeks">
+      <div class="week">
+        <div class="week-label amber">Week 5</div>
+        <p>Build Version 1 of the sales playbook — discovery call framework (MEDDIC-adapted), demo script, objection handling, and qualification criteria. Version 1 is a starting point; it will be updated every sprint as real deal data comes in.</p>
+      </div>
+      <div class="week">
+        <div class="week-label amber">Week 6</div>
+        <p>Configure CRM with stage definitions and dashboards. Build and automate 3 outreach sequences for Corp Dev, PE, and IB personas using sequencing tools like Clay— LinkedIn Ads + email running with minimum human dependency to maintain.</p>
+      </div>
+      <div class="week">
+        <div class="week-label amber">Week 7</div>
+        <p>Build target account list across US, EU, and India. Begin outreach personally. Focus on closing the first enterprise conversations myself — demonstrating the motion before adding anyone else.</p>
+      </div>
+      <div class="week">
+        <div class="week-label amber">Week 8</div>
+        <p>BDR hiring underway. Sit with the new BDR to review email messaging together — create messaging & positioning, set up A/B tests across subject lines and CTAs, and validate what's getting replies before handing over the sequences.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar a">
+      <div class="pillar-label amber">GTM Architecture</div>
+      <h3>Sales Playbook (v1)</h3>
+      <ul>
+        <li>Discovery call framework (MEDDIC-adapted for M&amp;A buying context)</li>
+        <li>Demo structure tied to Corp Dev, COO, and CFO pain points</li>
+        <li>Objection handling guide with proof points from existing client wins</li>
+        <li>Multi-stakeholder navigation: CEO, COO, CFO, Corp Dev Head</li>
+        <li>Proposal and pilot structure — v1, updated after every deal cycle</li>
+      </ul>
+    </div>
+    <div class="pillar a">
+      <div class="pillar-label amber">Market Targeting</div>
+      <h3>US, EU &amp; India Account Lists</h3>
+      <ul>
+        <li>US: 30 PE firms (Scaleworks profile) with active acquisition mandates</li>
+        <li>US: 20 mid-market Corp Dev teams (Egnyte profile) in tech/fintech</li>
+        <li>EU: UK, Germany, Netherlands — top 20 targets each</li>
+        <li>India: companies scaling globally with active inorganic growth mandates</li>
+        <li>Prioritise firms displaced by Grata/SourceScrub Datasite merger</li>
+      </ul>
+    </div>
+    <div class="pillar a">
+      <div class="pillar-label amber">Revenue Infrastructure</div>
+      <h3>Automated &amp; Self-Sustaining</h3>
+      <ul>
+        <li>CRM pipeline with stage definitions, fields, and forecasting dashboard</li>
+        <li>Outreach sequences automated end-to-end — minimal manual upkeep</li>
+        <li>Tooling: sequencer + LinkedIn Sales Navigator + intent signal layer</li>
+        <li>A/B testing framework for email messaging from day one</li>
+        <li>Pricing and proposal templates ready before first enterprise demo</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="key-outcome">
+    <div class="outcome-icon amber">⚙️</div>
+    <div class="outcome-body">
+      <h4>Phase 2 Deliverable</h4>
+      <p>Version 1 of the sales playbook (living document), a configured CRM, 3 automated outreach sequences running with initial reply-rate data, a 100+ account GTM list across defined markets, and a BDR hire in progress. I'll have personally run the first enterprise deals through the system — proving it works before asking anyone else to use it.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase-panel" id="panel-2">
+
+  <div class="phase-header blue">
+    <div class="phase-number">03</div>
+    <div class="phase-meta">
+      <h2>Execute &amp; Prove — Days 61–90</h2>
+      <p>The system goes live at scale. The BDR joins and ramps. I'm leading enterprise conversations. Given that buying cycles in this space run approx. 3–6 months, the right measure at Day 90 will be new 2–3 qualified opportunities formally in the pipeline — accounts that have been through discovery, confirmed strategic fit, and are actively moving forward. AEs will only be considered once the funnel has consistent demo volume that justifies the hire. We scale after proving repeatability, not before.</p>
+      <div class="focus-tags">
+        <span class="tag blue">Pipeline Activation</span>
+        <span class="tag blue">BDR Onboarding</span>
+        <span class="tag blue">Weekly Deal Reviews</span>
+        <span class="tag blue">Signal-Based Routing</span>
+        <span class="tag blue">90-Day Board Report</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-value blue">2–3</div>
+      <div class="metric-label">New qualified enterprise opportunities actively in pipeline (US / EU / India)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value blue">1–2</div>
+      <div class="metric-label">BDR ramped and producing pipeline independently</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value blue">90</div>
+      <div class="metric-label">Day board report + 6-month forecast delivered</div>
+    </div>
+  </div>
+
+  <div class="week-timeline">
+    <h3>Week by Week</h3>
+    <div class="weeks">
+      <div class="week">
+        <div class="week-label blue">Week 9</div>
+        <p>BDR joins. Onboard using the Version 1 playbook from Phase 2. Run first joint discovery calls together. Track leading indicators: meetings booked, email reply rate, demo-to-proposal rate, and pipeline velocity.</p>
+      </div>
+      <div class="week">
+        <div class="week-label blue">Week 10</div>
+        <p>Accelerate outbound. Introduce signal-based routing — flag accounts showing acquisition intent: Corp Dev hires, COO with M&amp;A mandate, recent funding rounds, leadership changes. Prioritise across US, EU, and India.</p>
+      </div>
+      <div class="week">
+        <div class="week-label blue">Week 11</div>
+        <p>Run first structured weekly deal review. Confirm 2–3 accounts are in active, qualified conversations. Refine the playbook based on real data — what's getting replies, where demos stall, and where we're winning on value.</p>
+      </div>
+      <div class="week">
+        <div class="week-label blue">Week 12</div>
+        <p>Present the 90-day report to founders: pipeline health, conversion metrics, ICP refinements, learnings from US vs EU vs India buyer behaviour, and a 6-month roadmap — including the conditions and evidence base for when to hire the first AE.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar b">
+      <div class="pillar-label blue">Pipeline Execution</div>
+      <h3>Revenue Activity</h3>
+      <ul>
+        <li>Weekly pipeline review every week</li>
+        <li>Track: meetings booked, demo conversion, proposal rate, pipeline velocity</li>
+        <li>2–3 qualified enterprise opportunities in motion across US, EU, India</li>
+        <li>I personally lead all enterprise deals — setting the standard before others scale it</li>
+        <li>Playbook updated every sprint based on live deal feedback</li>
+      </ul>
+    </div>
+    <div class="pillar b">
+      <div class="pillar-label blue">Team Building</div>
+      <h3>BDR Ramp · AE Timing</h3>
+      <ul>
+        <li>BDR onboarded on Version 1 playbook from Phase 2</li>
+        <li>Weeks 1–2: shadow and co-pilot on outreach and discovery calls</li>
+        <li>Week 3: BDR running sequences and booking demos independently</li>
+        <li>AE hire considered only when demo volume is consistent enough to justify it — not before</li>
+        <li>AE hire criteria, comp structure, and regional focus defined at Day 90 review</li>
+      </ul>
+    </div>
+    <div class="pillar b">
+      <div class="pillar-label blue">Leadership Reporting</div>
+      <h3>90-Day Review</h3>
+      <ul>
+        <li>Pipeline snapshot: size, velocity, and stage distribution by region</li>
+        <li>Conversion funnel vs the baseline assumptions from the Day 30 audit</li>
+        <li>ICP refinements — what the market confirmed and what it corrected</li>
+        <li>Key learnings on buyer behaviour: US vs EU vs India</li>
+        <li>6-month revenue forecast + evidence-based case for next team hires</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="key-outcome">
+    <div class="outcome-icon blue">🎯</div>
+    <div class="outcome-body">
+      <h4>Phase 3 Deliverable</h4>
+      <p>A live global pipeline with 2–3 qualified enterprise opportunities actively progressing in the US, EU, or India; BDRs producing pipeline independently; weekly revenue cadence firmly in place; and a data-backed 6-month growth plan delivered to founders at Day 90 — including a clear, evidence-based case for when and why to hire the first AE.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-divider"></div>
+
+<!-- Closing narrative -->
+<div class="narrative">
+  <p>"I've built this engine twice before. Both times the instinct was to move fast. <strong>Both times, the right call was to take a step back and listen.</strong> The founders always knew things about their best customers that hadn't been written down anywhere."</p>
+  <p>"My first focus will be finding the <strong>repeatable deal origination motion — leading with actual acquisition opportunities and relationships, not just product demos</strong>. Once that motion is working across regions, everything else scales around it."</p>
+  <p>"Strategies will evolve. The market will tell us things we don't expect.<strong>The plan is the starting point — the feedback loop is the real product.</strong>"</p>
+</div>
+
+<div class="footer-note">Prepared by Abhyuday · Head of Sales / CRO Application · GrowthPal</div>
+
+<script>
+function switchPhase(idx) {
+  document.querySelectorAll('.phase-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+  document.querySelectorAll('.phase-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+</script>
+</body>
+</html>
